@@ -3,7 +3,12 @@
   padding:0;
   box-sizing: border-box;
 }
-html, body {
+html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+body {
   margin: 0;
   padding: env(safe-area-inset-top)
            env(safe-area-inset-right)
@@ -11,9 +16,6 @@ html, body {
            env(safe-area-inset-left);
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
-}
-body {
   background: #250f06;
   font-family: "Helvetica Neue",Arial,"Hiragino Sans","Noto Sans",メイリオ,Meiryo,sans-serif;
   font-size: 11px;
@@ -199,10 +201,9 @@ h1 {
   width: 98%;
 }
 .charaBox {
-  display: flex;
-  flex-direction: column;
-  width: calc((100% - 30px) / 4);
+  flex: 1 1 367px;
   min-width: 367px;
+  max-width: 1fr;
   padding-bottom: 5px;
   background: #343433;
 }
@@ -468,7 +469,6 @@ h1 {
     width: 100%;
   }
   #wrapper { gap: 5px; }
-  .charaBox { width: calc((100% - 5px) / 2); }
   .bAbiBlock, .eAbiBlock, .sAbiBlock {
     font-size: 10px;
   }
