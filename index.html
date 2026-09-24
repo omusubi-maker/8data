@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#250f06">
+  <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1Iw3XA0oe46q3VXMgSpIph1H90yAEEiku">
+  <link rel="stylesheet" href="style.css">
+  <title>救我の書</title>
+
+<body>
+  <div id="safeAreaInfo"></div>
+  <h1 class="line">キャラクター情報</h1>
+
+  <div id="menu">
+    <div>
+      <button type="button" id="btnSearch">絞り込み</button>
+      <div id="searchBlock">
+        <div class="search_wrap">
+          <ul id="cbStar" class="cbList">
+            <li><label><input type="checkbox" name="star" value="5" checked>星5</label></li>
+            <li><label><input type="checkbox" name="star" value="4" checked>星4</label></li>
+            <li><label><input type="checkbox" name="star" value="3" checked>星3</label></li>
+
+            <li><label><input type="checkbox" name="influence" value="富" checked>富</label></li>
+            <li><label><input type="checkbox" name="influence" value="権力" checked>権力</label></li>
+            <li><label><input type="checkbox" name="influence" value="名声" checked>名声</label></li>
+          </ul>
+
+          <ul id="cbJob" class="cbList">
+            <li><label><input type="checkbox" name="job" value="剣士" checked>剣士</label></li>
+            <li><label><input type="checkbox" name="job" value="薬師" checked>薬師</label></li>
+            <li><label><input type="checkbox" name="job" value="盗賊" checked>盗賊</label></li>
+            <li><label><input type="checkbox" name="job" value="学者" checked>学者</label></li>
+            <li><label><input type="checkbox" name="job" value="神官" checked>神官</label></li>
+            <li><label><input type="checkbox" name="job" value="狩人" checked>狩人</label></li>
+            <li><label><input type="checkbox" name="job" value="商人" checked>商人</label></li>
+            <li><label><input type="checkbox" name="job" value="踊子" checked>踊子</label></li>
+          </ul>
+
+          <ul id="cbPhyAtk" class="cbList">
+            <li><label><input type="checkbox" name="phyAtk" value="w-sword" checked>剣</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-axe" checked>斧</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-short" checked>短剣</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-book" checked>本</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-staff" checked>杖</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-bow" checked>弓</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-spear" checked>槍</label></li>
+            <li><label><input type="checkbox" name="phyAtk" value="w-fan" checked>扇</label></li>
+          </ul>
+
+          <ul id="cbAtrAtk" class="cbList">
+            <li><label><input type="checkbox" name="atrAtk" value="a-fire" checked>火</label></li>
+            <li><label><input type="checkbox" name="atrAtk" value="a-ice" checked>氷</label></li>
+            <li><label><input type="checkbox" name="atrAtk" value="a-thunder" checked>雷</label></li>
+            <li><label><input type="checkbox" name="atrAtk" value="a-wind" checked>風</label></li>
+            <li><label><input type="checkbox" name="atrAtk" value="a-light" checked>光</label></li>
+            <li><label><input type="checkbox" name="atrAtk" value="a-dark" checked>闇</label></li>
+          </ul>
+
+          <button type="button" id="btnOnOff" name="1">全ON/OFF</button>
+        </div>
+      </div>
+
+      <button type="button" id="btnOpen">キャラ選択</button>
+
+      <dialog id="modalDialog" class="modal_charaBox">
+        <div class="modal_wrapper">
+          <button type="button" id="btnReset">全選択解除</button>
+          <button type="button" id="btnClose">✕</button>
+          <ul id="charaList"></ul>
+        </div>
+      </dialog>
+
+      <button type="button" id="btnAllbAbi">バトアビ</button>
+      <button type="button" id="btnAlleAbi">EX/必殺技</button>
+      <button type="button" id="btnAllsAbi">サポアビ</button>
+    </div>
+
+    <div id="chara_count"></div>
+  </div>
+
+  <template id="temp">
+    <div class="charaBox">
+      <div class="nameBlock"
+            data-star=""
+            data-job=""
+            data-influ="">
+        <div class="triangle"></div>
+        <div class="imgS"></div>
+        <div class="charaName handle"></div>
+        <div class="upperDame">
+          <span class="moji">ダメ上限</span><br>
+          <span class="upperDameVal"></span>
+        </div>
+        <div class="physicalA"></div>
+        <div class="attributeA"></div>
+      </div>
+      <div class="upperBlock"></div>
+      <div class="bottomBlock">
+        <div class="abiMenu">
+          <div class="bAbiTitle js-ac">バトアビ</div>
+          <div class="eAbiTitle js-ac">EX/必殺技</div>
+          <div class="sAbiTitle js-ac">サポアビ</div>
+        </div>
+        <div class="bAbiBlock"></div>
+        <div class="eAbiBlock"></div>
+        <div class="sAbiBlock"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tmpl-bAbi">
+    <div class="bAbi">
+      <div class="bAbiName item"></div>
+      <div class="bAbiDetail item"></div>
+      <div class="sp item">
+        <div>SP:</div>
+        <div class="spVal"></div>
+      </div>
+      <div class="boosts item"></div>
+    </div>
+  </template>
+
+  <template id="tmpl-eAbi">
+    <div class="eAbi">
+      <div class="eAbiName item"></div>
+      <div class="eAbiRequire item"></div>
+      <div class="eAbiNum item"></div>
+      <div class="eAbiDetail item"></div>
+    </div>
+  </template>
+
+  <template id="tmpl-sMove">
+    <div class="sMove">
+      <div class="sMoveName item"></div>
+      <div class="sMoveCate item"></div>
+      <div class="sMoveDetail item"></div>
+    </div>
+  </template>
+
+  <template id="tmpl-sAbi"><div class="sAbi"><div class="sAbiName item"></div><div class="sAbiDetail item"></div></div></template>
+
+  <div id="wrapper"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
