@@ -469,8 +469,16 @@ h1 {
     width: 100%;
   }
   #wrapper { gap: 5px; }
-  .bAbiBlock, .eAbiBlock, .sAbiBlock {
-    font-size: 10px;
+  .bAbiBlock, .eAbiBlock, .sAbiBlock { font-size: 10px; }
+
+  @media screen and (orientation: landscape) {
+    .charaBox {
+      width: calc((100% - 10px) / 2);
+    }
+
+    body {
+      font-size: 10px;
+    }
   }
 }
 
