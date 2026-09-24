@@ -9,6 +9,13 @@ async function loadJson() {
 
 document.addEventListener("DOMContentLoaded", loadJson);
 
+function initApp() {
+  setupCharaList(serverData.chara);
+  createCards(serverData.chara, serverData.kotadame);
+  setupEventListeners();
+  console.log("initApp 完了");
+}
+
 const imgGurl = 'https://lh3.googleusercontent.com/d/';
 
 const PHY_MAP = {
