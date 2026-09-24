@@ -233,15 +233,23 @@ function setupUpperOrigin(clone, chara) {
     }
 
     const keys = Object.keys(data);
-    if (!keys.length) continue;
+
+    if (sectionName !== "atkValue" && sectionName !== "rdtAtr") {
+      const hasValidValue = keys.some(key => {
+        const v = data[key];
+        return v !== null && v !== "" && v !== undefined;
+      });
+      if (!hasValidValue) continue;
+    }
 
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('upper', sectionName);
-    upperBlock.appendChild(rowDiv);
 
     if (sectionName === "atkValue") {
       rowDiv.style.gridTemplateColumns = "1fr 1fr 6fr";
     }
+
+    upperBlock.appendChild(rowDiv);
 
     for (const key of keys) {
       const rawVal = data[key];
