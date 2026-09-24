@@ -1,7 +1,7 @@
 let serverData = null;
 
 async function loadJson() {
-  const url = "https://drive.google.com/uc?export=download&id=1vJCM99N1qWYyJBCYAAaxLrfLOcvhV29H";
+  const url = "https://script.google.com/macros/s/AKfycbxvdYQ1mVhPqisUkY2YFa1PxoQPm5oIb84gJsPiRl3jMtU-sFsYUZ8rRommG22GJMpI/exec";
   const res = await fetch(url);
   serverData = await res.json();
   initApp();
