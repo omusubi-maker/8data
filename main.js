@@ -423,7 +423,7 @@ function setupCharaList(charaList) {
 }
 
 function setupEventListeners(){
-  const dialogBox = document.getElementById('modalDialog');
+  const overlay = document.getElementById('modalOverlay');
   const btnOpen = document.getElementById('btnOpen');
   const btnClose = document.getElementById('btnClose');
   const btnReset = document.getElementById('btnReset');
@@ -431,7 +431,13 @@ function setupEventListeners(){
   const chrBoxNum = document.getElementsByClassName('charaBox');
   const charaCount = document.getElementById('chara_count');
 
-  btnOpen.addEventListener('click', () => dialogBox.showModal());
+  btnOpen.addEventListener('click', () => {
+    document.getElementById('modalOverlay').classList.add('is-open');
+  });
+
+  btnClose.addEventListener('click', () => {
+    document.getElementById('modalOverlay').classList.remove('is-open');
+  });
 
   const ul = document.getElementById('charaList');
   ul.addEventListener('click', (e) => {
@@ -452,9 +458,10 @@ function setupEventListeners(){
     charaCount.textContent = visibleCount;
   });
 
-  btnClose.addEventListener('click', () => dialogBox.close());
-  dialogBox.addEventListener('click', (e) => {
-    if(e.target.closest('.modal_wrapper')===null) dialogBox.close();
+  overlay.addEventListener('click', (e) => {
+    if (!e.target.closest('.modal_wrapper')) {
+      overlay.classList.remove('is-open');
+    }
   });
 
   btnReset.addEventListener('click', () => {
