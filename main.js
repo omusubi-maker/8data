@@ -571,6 +571,11 @@ function cbChoice() {
   let visibleCount = 0;
 
   for (let i = 0; i < nameBlocks.length; i++) {
+    const card = nameBlocks[i].closest('.charaBox');
+    card.classList.remove("is-hidden");
+  }
+
+  for (let i = 0; i < nameBlocks.length; i++) {
     const nb = nameBlocks[i];
     const card = nb.closest('.charaBox');
     const charStar = nb.dataset.star;
@@ -581,6 +586,7 @@ function cbChoice() {
       card.classList.add("is-hidden");
       continue;
     }
+
     const influencePass = selectInfluence.some(sel => {
       return influenceMap[sel].includes(charInflu);
     });
@@ -617,10 +623,9 @@ function cbChoice() {
       card.classList.add("is-hidden");
       continue;
     }
-
-    card.style.display = "block";
     visibleCount++;
   }
+
   document.getElementById("chara_count").textContent = visibleCount;
 }
 

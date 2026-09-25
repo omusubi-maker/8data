@@ -136,19 +136,18 @@ h1 {
   top: calc(env(safe-area-inset-top) + 10px);
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 0 10px 5px;
-  width: 95%;
-  max-width: 1025px;
+  width: 100%;
+  max-width: calc(100% - 16px);
   height: calc(100% - env(safe-area-inset-top) - 20px);
+  padding: 10px 0 10px 5px;
   background: rgba(0,0,0,.7);
   box-shadow: 0 4px 8px rgba(0,0,0,.5);
-  opacity: 1;
-  transition: opacity .3s;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #343433 #000;
   z-index: 20;
 }
+
 #btnReset {
   padding: 5px 10px;
   background: yellow;
@@ -192,6 +191,9 @@ h1 {
 #charaList li input[type="checkbox"]:checked + label {
   border: 1px solid #fff;
   color: yellow;
+}
+.is-hidden {
+  display: none !important;
 }
 #wrapper {
   display: grid;
@@ -463,14 +465,6 @@ h1 {
 @media screen and (orientation: landscape) {
   .modal_wrapper {
     width: 90%;
-    max-width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
-    left: 50%;
-    transform: translateX(-50%);
-    top: calc(env(safe-area-inset-top) + 10px);
-    height: calc(100% - env(safe-area-inset-top) - 20px);
-  }
-
-  .modal_charaBox {
     max-width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
   }
 }
