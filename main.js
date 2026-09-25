@@ -431,38 +431,35 @@ function setupEventListeners(){
   const chrBoxNum = document.getElementsByClassName('charaBox');
   const charaCount = document.getElementById('chara_count');
 
-  btnOpen.addEventListener('click', () => {
-    dialogBox.showModal();
+  btnOpen.addEventListener('click', () => dialogBox.showModal());
+
+  const ul = document.getElementById('charaList');
+  ul.addEventListener('click', (e) => {
+    if(e.target.tagName !== 'INPUT') return;
+
+    const selectChara = [...cbChara].filter(c => c.checked).map(c => c.value);
+    let visibleCount = 0;
+
+    for(let j=0; j<chrBoxNum.length; j++){
+      const str = chrBoxNum[j].querySelector('.charaName').innerText;
+      if(selectChara.includes(str)){
+        chrBoxNum[j].style.display = 'flex';
+        visibleCount++;
+      } else {
+        chrBoxNum[j].style.display = 'none';
+      }
+    }
+    charaCount.textContent = visibleCount;
   });
 
-  for(const chara of cbChara){
-    chara.addEventListener('click', () => {
-      const selectChara = Array.from(cbChara).filter(c => c.checked).map(c => c.value);
-      let visibleCount = 0;
-
-      for(let j=0; j<chrBoxNum.length; j++){
-        const str = chrBoxNum[j].getElementsByClassName('charaName')[0].innerText;
-        if(selectChara.includes(str)){
-          chrBoxNum[j].style.setProperty('display','flex');
-          visibleCount++;
-        } else {
-          chrBoxNum[j].style.display = 'none';
-        }
-      }
-      charaCount.textContent = visibleCount;
-    });
-  }
-
-  btnClose.addEventListener('click', () => { dialogBox.close(); });
+  btnClose.addEventListener('click', () => dialogBox.close());
   dialogBox.addEventListener('click', (e) => {
-    if(e.target.closest('.modal_wrapper')===null) {
-      dialogBox.close();
-    }
+    if(e.target.closest('.modal_wrapper')===null) dialogBox.close();
   });
 
   btnReset.addEventListener('click', () => {
     cbChara.forEach(c => c.checked = false);
-    Array.from(chrBoxNum).forEach(box => box.style.setProperty('display','flex'));
+    [...chrBoxNum].forEach(box => box.style.display = 'flex');
     charaCount.textContent = chrBoxNum.length;
   });
 
@@ -581,19 +578,19 @@ function cbChoice() {
     const charInflu = nb.dataset.influ;
 
     if (!selectStar.includes(charStar)) {
-      card.style.display = "none";
+      card.classList.add("is-hidden");
       continue;
     }
     const influencePass = selectInfluence.some(sel => {
       return influenceMap[sel].includes(charInflu);
     });
     if (!influencePass) {
-      card.style.display = "none";
+      card.classList.add("is-hidden");
       continue;
     }
 
     if (selectJob.length > 0 && !selectJob.includes(charJob)) {
-      card.style.display = "none";
+      card.classList.add("is-hidden");
       continue;
     }
 
@@ -617,7 +614,7 @@ function cbChoice() {
         : (phyPass || atrPass);
 
     if (!atkPass) {
-      card.style.display = "none";
+      card.classList.add("is-hidden");
       continue;
     }
 
@@ -631,6 +628,6 @@ function hideAllCharacters() {
   const nameBlocks = document.getElementsByClassName('nameBlock');
   for (let i = 0; i < nameBlocks.length; i++) {
     const card = nameBlocks[i].closest('.charaBox');
-    card.style.display = "none";
+    card.classList.add("is-hidden");
   }
 }
