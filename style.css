@@ -59,19 +59,24 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
+#searchContainer {
+  position: relative;
+}
 #searchBlock {
   position: absolute;
   top: calc(100% + 5px);
   left: env(safe-area-inset-left);
-  background: rgba(0,0,0,.7);
   width: 0;
-  overflow-x: hidden;
+  height: 0;
+  overflow: hidden;
+  background: rgba(0,0,0,.7);
+  transition: height .3s;
   z-index: 10;
-  transition: width .3s;
 }
 #searchBlock.open-menu {
   width: 100%;
   max-width: 510px;
+  height: auto;
 }
 .search_wrap {
   margin: 5px;
