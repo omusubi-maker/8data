@@ -60,7 +60,7 @@ h1 {
   align-items: center;
 }
 #searchBlock {
-  background: rgba(0,0,0,.8);
+  background: rgba(0,0,0,.7);
   position: absolute;
   width: 0;
   left: 0;
@@ -129,7 +129,7 @@ h1 {
   border: 0;
 }
 .modal_charaBox::backdrop {
-  background: rgb(0 0 0/.6);
+  background: rgb(0 0 0/.7);
 }
 .modal_wrapper {
   position: fixed;
@@ -140,7 +140,7 @@ h1 {
   width: 95%;
   max-width: 1025px;
   height: calc(100% - env(safe-area-inset-top) - 20px);
-  background: rgba(0,0,0,.9);
+  background: rgba(0,0,0,.8);
   box-shadow: 0 4px 8px rgba(0,0,0,.5);
   opacity: 1;
   transition: opacity .3s;
