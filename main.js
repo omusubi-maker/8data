@@ -13,15 +13,14 @@ function initApp() {
   setupCharaList(serverData.chara);
   createCards(serverData.chara, serverData.kotadame);
   setupEventListeners();
-  console.log("initApp 完了");
 }
 
-const imgGurl = 'https://lh3.googleusercontent.com/d/';
+const imgBase = "./img/";
 
 const PHY_MAP = {
   '1': { cls: 'w-sword',  title: '剣' },
   '2': { cls: 'w-axe',    title: '斧' },
-  '3': { cls: 'w-short',  title: '短' },
+  '3': { cls: 'w-short',  title: '短剣' },
   '4': { cls: 'w-book',   title: '本' },
   '5': { cls: 'w-staff',  title: '杖' },
   '6': { cls: 'w-bow',    title: '弓' },
@@ -47,23 +46,23 @@ const UPPER_ICON_MAP = {
   },
 
   atkPhys: {
-    "剣攻": { cls: "atk-sword", title: "剣ダメ", type: "percent" },
-    "斧攻": { cls: "atk-axe", title: "斧ダメ", type: "percent" },
-    "短攻": { cls: "atk-short", title: "短ダメ", type: "percent" },
-    "本攻": { cls: "atk-book", title: "本ダメ", type: "percent" },
-    "杖攻": { cls: "atk-staff", title: "杖ダメ", type: "percent" },
-    "弓攻": { cls: "atk-bow", title: "弓ダメ", type: "percent" },
-    "槍攻": { cls: "atk-spear", title: "槍ダメ", type: "percent" },
-    "扇攻": { cls: "atk-fan", title: "扇ダメ", type: "percent" }
+    "剣攻": { cls: "w-sword", title: "剣ダメ", type: "percent" },
+    "斧攻": { cls: "w-axe", title: "斧ダメ", type: "percent" },
+    "短攻": { cls: "w-short", title: "短剣ダメ", type: "percent" },
+    "本攻": { cls: "w-book", title: "本ダメ", type: "percent" },
+    "杖攻": { cls: "w-staff", title: "杖ダメ", type: "percent" },
+    "弓攻": { cls: "w-bow", title: "弓ダメ", type: "percent" },
+    "槍攻": { cls: "w-spear", title: "槍ダメ", type: "percent" },
+    "扇攻": { cls: "w-fan", title: "扇ダメ", type: "percent" }
   },
 
   atkAtrs: {
-    "火攻": { cls: "atk-fire", title: "火ダメ", type: "percent" },
-    "氷攻": { cls: "atk-ice", title: "氷ダメ", type: "percent" },
-    "雷攻": { cls: "atk-thunder", title: "雷ダメ", type: "percent" },
-    "風攻": { cls: "atk-wind", title: "風ダメ", type: "percent" },
-    "光攻": { cls: "atk-light", title: "光ダメ", type: "percent" },
-    "闇攻": { cls: "atk-dark", title: "闇ダメ", type: "percent" }
+    "火攻": { cls: "a-fire", title: "火ダメ", type: "percent" },
+    "氷攻": { cls: "a-ice", title: "氷ダメ", type: "percent" },
+    "雷攻": { cls: "a-thunder", title: "雷ダメ", type: "percent" },
+    "風攻": { cls: "a-wind", title: "風ダメ", type: "percent" },
+    "光攻": { cls: "a-light", title: "光ダメ", type: "percent" },
+    "闇攻": { cls: "a-dark", title: "闇ダメ", type: "percent" }
   },
 
   atkOther: {
@@ -154,12 +153,13 @@ function setupCharaDetails(clone, chara, kotoDame) {
 
   const nameEl = nb.querySelector('.charaName');
   if (nameEl) nameEl.textContent = chara['名前'] || '';
+
   const imgS = nb.querySelector('.imgS');
 
   if (imgS) {
-    const imgId = chara['imgS'] || '1FZ7zv_2CBm3w2Ic6kRQW5rKTaY9nj8dG';
+    const fileName = chara['imgS'] || 'no-img.png';
     const img = document.createElement('img');
-    img.src = imgGurl + imgId;
+    img.src = imgBase + fileName;
     img.alt = chara['名前'];
     img.title = chara['名前'];
     img.width = 36;
@@ -288,7 +288,6 @@ function setupUpperOrigin(clone, chara) {
       }
 
       const span = document.createElement('span');
-
       const icon = document.createElement('div');
       icon.classList.add('icon', iconInfo.cls);
       icon.title = iconInfo.title;

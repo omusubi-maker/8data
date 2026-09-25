@@ -408,8 +408,8 @@ h1 {
 .sAbiName { background: #1f7381; }
 
 .icon {
-  background-image: url("https://lh3.googleusercontent.com/d/1IW_ZD7XOnKLoFHReHngHIjgY8OkdX-Z0");
-  background-size: 768px 16px;
+  background-image: url("./img/icons_sprite.png");
+  background-size: 544px 16px;
   display: inline-block;
   vertical-align: middle;
   width: 16px;
@@ -432,71 +432,21 @@ h1 {
 .icon.a-crit    { background-position: -224px 0; }
 .icon.atk-phy   { background-position: -240px 0; }
 .icon.atk-atr   { background-position: -256px 0; }
-.icon.atk-sword { background-position: -272px 0; }
-.icon.atk-axe   { background-position: -288px 0; }
-.icon.atk-short { background-position: -304px 0; }
-.icon.atk-book  { background-position: -320px 0; }
-.icon.atk-staff { background-position: -336px 0; }
-.icon.atk-bow   { background-position: -352px 0; }
-.icon.atk-spear { background-position: -368px 0; }
-.icon.atk-fan   { background-position: -384px 0; }
-.icon.atk-fire    { background-position: -400px 0; }
-.icon.atk-ice     { background-position: -416px 0; }
-.icon.atk-thunder { background-position: -432px 0; }
-.icon.atk-wind    { background-position: -448px 0; }
-.icon.atk-light   { background-position: -464px 0; }
-.icon.atk-dark    { background-position: -480px 0; }
-.icon.o-crit    { background-position: -496px 0; }
-.icon.o-speed   { background-position: -512px 0; }
-.icon.o-cri     { background-position: -528px 0; }
-.icon.o-all     { background-position: -544px 0; }
-.icon.o-power   { background-position: -560px 0; }
-.icon.dmgLimit { background-position: -576px 0; }
-.icon.def-phy { background-position: -592px 0; }
-.icon.def-atr { background-position: -608px 0; }
-.icon.res-phy { background-position: -624px 0; }
-.icon.res-atr { background-position: -640px 0; }
-.icon.res-fire    { background-position: -656px 0; }
-.icon.res-ice     { background-position: -672px 0; }
-.icon.res-thunder { background-position: -688px 0; }
-.icon.res-wind    { background-position: -704px 0; }
-.icon.res-light   { background-position: -720px 0; }
-.icon.res-dark    { background-position: -736px 0; }
-.icon.note { background-position: -752px 0; }
-
-/*@media screen and (max-width: 932px) {
-  #searchBlock.open-menu {
-    width: 100%;
-  }
-  #wrapper { gap: 5px; }
-  .bAbiBlock, .eAbiBlock, .sAbiBlock { font-size: 10px; }
-
-  @media screen and (orientation: landscape) {
-    .charaBox {
-      width: calc((100% - 10px) / 2);
-    }
-    body {
-      font-size: 10px;
-    }
-  }
-}
-
-@media screen and (max-width: 599px) {
-  #wrapper {
-    width: 100%;
-    max-width: none;
-  }
-  .charaBox {
-    margin: 0 auto;
-    width: 98%;
-  }
-  .upperBlock {
-    font-size: 10px;
-  }
-  dialog:-internal-dialog-in-top-layer {
-    max-width: 100vw;
-  }
-  .modal_charaBox {
-    max-width: calc(100% - 16px);
-  }*/
+.icon.o-crit { background-position: -272px 0; }
+.icon.o-speed   { background-position: -288px 0; }
+.icon.o-cri { background-position: -304px 0; }
+.icon.o-all  { background-position: -320px 0; }
+.icon.o-power { background-position: -336px 0; }
+.icon.dmgLimit   { background-position: -352px 0; }
+.icon.def-phy { background-position: -368px 0; }
+.icon.def-atr   { background-position: -384px 0; }
+.icon.res-phy    { background-position: -400px 0; }
+.icon.res-atr     { background-position: -416px 0; }
+.icon.res-fire { background-position: -432px 0; }
+.icon.res-ice    { background-position: -448px 0; }
+.icon.res-thunder   { background-position: -464px 0; }
+.icon.res-wind    { background-position: -480px 0; }
+.icon.res-light    { background-position: -496px 0; }
+.icon.res-dark   { background-position: -512px 0; }
+.icon.note     { background-position: -528px 0; }
 }
