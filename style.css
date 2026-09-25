@@ -462,7 +462,7 @@ h1 {
 
 @media screen and (orientation: landscape) {
   .modal_wrapper {
-    width: 85%;
+    width: 90%;
     max-width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
     left: 50%;
     transform: translateX(-50%);
