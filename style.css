@@ -132,17 +132,17 @@ h1 {
   background: rgb(0 0 0/.6);
 }
 .modal_wrapper {
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 10px);
   left: 50%;
+  transform: translateX(-50%);
   padding: 10px 0 10px 5px;
   width: 100%;
   max-width: 1025px;
-  height: 90%;
+  height: calc(100% - env(safe-area-inset-top) - 20px);
   background: rgba(0,0,0,.9);
   box-shadow: 0 4px 8px rgba(0,0,0,.5);
   opacity: 1;
-  transform: translate(-50%, -50%);
   transition: opacity .3s;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -449,4 +449,13 @@ h1 {
 .icon.res-light    { background-position: -496px 0; }
 .icon.res-dark   { background-position: -512px 0; }
 .icon.note     { background-position: -528px 0; }
+
+@media screen and (max-width: 599px) {
+  body { font-size: 10px; }
+  dialog:-internal-dialog-in-top-layer {
+    max-width: 100vw;
+  }
+  .modal_charaBox {
+    max-width: calc(100% - 16px);
+  }
 }
