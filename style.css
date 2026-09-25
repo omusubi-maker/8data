@@ -140,7 +140,7 @@ h1 {
   width: 95%;
   max-width: 1025px;
   height: calc(100% - env(safe-area-inset-top) - 20px);
-  background: rgba(0,0,0,.8);
+  background: rgba(0,0,0,.7);
   box-shadow: 0 4px 8px rgba(0,0,0,.5);
   opacity: 1;
   transition: opacity .3s;
