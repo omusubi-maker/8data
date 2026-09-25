@@ -97,14 +97,14 @@ h1 {
   width: 100%;
   align-items: center;
 }
-#cbStar li { background: #5300f6; }
-#cbJob li { background: #0000f6; }
+#cbStar li { background: #6e00ff; }
+#cbJob li { background: #0012ff; }
 
 #cbStar input[type="checkbox"] {
-  accent-color: #5300f6;
+  accent-color: #6e00ff;
 }
 #cbJob input[type="checkbox"] {
-  accent-color: #0000f6;
+  accent-color: #0012ff;
 }
 .cbList li input[type="checkbox"], #btnAbiName {
   margin: 3px 2px 3px 3px;
@@ -201,6 +201,8 @@ h1 {
   gap: 10px;
 }
 .charaBox {
+  display: flex;
+  flex-direction: column;
   padding-bottom: 5px;
   background: #343433;
 }
@@ -461,4 +463,40 @@ h1 {
 .icon.res-light   { background-position: -720px 0; }
 .icon.res-dark    { background-position: -736px 0; }
 .icon.note { background-position: -752px 0; }
+
+/*@media screen and (max-width: 932px) {
+  #searchBlock.open-menu {
+    width: 100%;
+  }
+  #wrapper { gap: 5px; }
+  .bAbiBlock, .eAbiBlock, .sAbiBlock { font-size: 10px; }
+
+  @media screen and (orientation: landscape) {
+    .charaBox {
+      width: calc((100% - 10px) / 2);
+    }
+    body {
+      font-size: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  #wrapper {
+    width: 100%;
+    max-width: none;
+  }
+  .charaBox {
+    margin: 0 auto;
+    width: 98%;
+  }
+  .upperBlock {
+    font-size: 10px;
+  }
+  dialog:-internal-dialog-in-top-layer {
+    max-width: 100vw;
+  }
+  .modal_charaBox {
+    max-width: calc(100% - 16px);
+  }*/
 }
