@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#250f06">
   <link rel='icon' type='image/x-icon' href='./icon/favicon.ico'>
   <link rel="apple-touch-icon" href="./icon/apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=09260239">
+  <link rel="stylesheet" href="style.css?v=09260307">
   <title>救我の書</title>
 
 <body>
@@ -65,13 +65,13 @@
 
       <button type="button" id="btnOpen">キャラ選択</button>
 
-      <dialog id="modalDialog" class="modal_charaBox">
-        <div class="modal_wrapper">
-          <button type="button" id="btnReset">全選択解除</button>
-          <button type="button" id="btnClose">✕</button>
-          <ul id="charaList"></ul>
-        </div>
-      </dialog>
+     <div id="modalOverlay" class="overlay">
+      <div class="modal_wrapper">
+        <button type="button" id="btnReset">全選択解除</button>
+        <button type="button" id="btnClose">✕</button>
+        <ul id="charaList"></ul>
+      </div>
+    </div>
 
       <button type="button" id="btnAllbAbi">バトアビ</button>
       <button type="button" id="btnAlleAbi">EX/必殺技</button>
