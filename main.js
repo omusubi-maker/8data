@@ -7,7 +7,18 @@ async function loadJson() {
   initApp();
 }
 
-document.addEventListener("DOMContentLoaded", loadJson);
+document.addEventListener("DOMContentLoaded", () => {
+  loadJson();
+
+  const cardList = document.getElementById("wrapper");
+  new Sortable(cardList, {
+    swap: true,
+    handle: '.charaName',
+    delay: 200,
+    delayOnTouchOnly: true,
+    animation: 150,
+  });
+});
 
 function initApp() {
   setupCharaList(serverData.chara);
@@ -423,12 +434,12 @@ function setupCharaList(charaList) {
 }
 
 function setupEventListeners(){
-  const charaCount = document.getElementById('chara_count');
   const cbStar = document.getElementsByName('star');
   const cbInfluence = document.getElementsByName('influence');
   const cbJob = document.getElementsByName('job');
   const cbPhyAtk = document.getElementsByName('phyAtk');
   const cbAtrAtk = document.getElementsByName('atrAtk');
+  const charaCount = document.getElementById('chara_count');
 
   for(let star of cbStar){ star.addEventListener('click', cbChoice); }
   for(let influence of cbInfluence){ influence.addEventListener('click', cbChoice); }
@@ -454,28 +465,31 @@ function setupEventListeners(){
     cbChoice();
   });
 
-  const btnReset = document.getElementById('btnReset');
   const cbChara = document.getElementsByName('chara');
   const chrBoxNum = document.getElementsByClassName('charaBox');
+  const btnReset = document.getElementById('btnReset');
 
-  const ul = document.getElementById('charaList');
-  ul.addEventListener('click', (e) => {
-    if(e.target.tagName !== 'INPUT') return;
+  for (const chara of cbChara) {
+    chara.addEventListener('change', () => {
+      const selectChara = Array.from(cbChara)
+        .filter(c => c.checked)
+        .map(c => c.value);
 
-    const selectChara = [...cbChara].filter(c => c.checked).map(c => c.value);
-    let visibleCount = 0;
+      let visibleCount = 0;
 
-    for(let j=0; j<chrBoxNum.length; j++){
-      const str = chrBoxNum[j].querySelector('.charaName').innerText;
-      if(selectChara.includes(str)){
-        chrBoxNum[j].style.display = 'flex';
-        visibleCount++;
-      } else {
-        chrBoxNum[j].style.display = 'none';
+      for (let j = 0; j < chrBoxNum.length; j++) {
+        const str = chrBoxNum[j].querySelector('.charaName').textContent;
+
+        if (selectChara.includes(str)) {
+          chrBoxNum[j].style.display = 'flex';
+          visibleCount++;
+        } else {
+          chrBoxNum[j].style.display = 'none';
+        }
       }
-    }
-    charaCount.textContent = visibleCount;
-  });
+      charaCount.textContent = visibleCount;
+    });
+  }
 
   btnReset.addEventListener('click', () => {
     cbChara.forEach(c => c.checked = false);
