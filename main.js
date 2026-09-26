@@ -2,7 +2,7 @@ let serverData = null;
 const dataPromise = loadJson();
 
 async function loadJson() {
-  const url = "./data.json";
+  const url = "data.json";
   const res = await fetch(url);
   return await res.json();
 }
@@ -436,19 +436,26 @@ function setupCharaList(charaList) {
   ul.appendChild(frag);
 }
 
+//現操作モードを管理('filter': 絞り込みモード / 'select': キャラ選択モード)
+let activeMode = 'filter';
+
 function setupEventListeners(){
   const cbStar = document.getElementsByName('star');
   const cbInfluence = document.getElementsByName('influence');
   const cbJob = document.getElementsByName('job');
   const cbPhyAtk = document.getElementsByName('phyAtk');
   const cbAtrAtk = document.getElementsByName('atrAtk');
-  const charaCount = document.getElementById('chara_count');
 
-  for(let star of cbStar){ star.addEventListener('click', cbChoice); }
-  for(let influence of cbInfluence){ influence.addEventListener('click', cbChoice); }
-  for(let job of cbJob){ job.addEventListener('click', cbChoice); }
-  for(let phyAtk of cbPhyAtk){ phyAtk.addEventListener('click', cbChoice); }
-  for(let atrAtk of cbAtrAtk){ atrAtk.addEventListener('click', cbChoice); }
+  const onFilterChange = () => {
+    activeMode = 'filter';
+    cbChoice();
+  };
+
+  for(let star of cbStar){ star.addEventListener('click', onFilterChange); }
+  for(let influence of cbInfluence){ influence.addEventListener('click', onFilterChange); }
+  for(let job of cbJob){ job.addEventListener('click', onFilterChange); }
+  for(let phyAtk of cbPhyAtk){ phyAtk.addEventListener('click', onFilterChange); }
+  for(let atrAtk of cbAtrAtk){ atrAtk.addEventListener('click', onFilterChange); }
 
   const btnOnOff = document.getElementById('btnOnOff');
   const checkGroup = document.querySelectorAll('.cbList input[type="checkbox"]');
@@ -465,39 +472,25 @@ function setupEventListeners(){
       }
     });
     btnOnOff.name = isChecked ? '0' : '1';
+    activeMode = 'filter';
     cbChoice();
   });
 
   const cbChara = document.getElementsByName('chara');
-  const chrBoxNum = document.getElementsByClassName('charaBox');
   const btnReset = document.getElementById('btnReset');
 
   for (const chara of cbChara) {
     chara.addEventListener('change', () => {
-      const selectChara = Array.from(cbChara)
-        .filter(c => c.checked)
-        .map(c => c.value);
-
-      let visibleCount = 0;
-
-      for (let j = 0; j < chrBoxNum.length; j++) {
-        const str = chrBoxNum[j].querySelector('.charaName').textContent;
-
-        if (selectChara.includes(str)) {
-          chrBoxNum[j].style.display = 'flex';
-          visibleCount++;
-        } else {
-          chrBoxNum[j].style.display = 'none';
-        }
-      }
-      charaCount.textContent = visibleCount;
+      activeMode = 'select';
+      cbChoice();
     });
   }
 
   btnReset.addEventListener('click', () => {
+    const cbChara = document.getElementsByName('chara');
     cbChara.forEach(c => c.checked = false);
-    [...chrBoxNum].forEach(box => box.style.display = 'flex');
-    charaCount.textContent = chrBoxNum.length;
+    activeMode = 'filter';
+    cbChoice();
   });
 
   document.getElementById('btnAllbAbi')?.addEventListener('click', () => toggleAbilityContainer('bAbi'));
@@ -517,6 +510,102 @@ function setupEventListeners(){
   });
 }
 
+function cbChoice() {
+  const nameBlocks = document.getElementsByClassName('nameBlock');
+  let visibleCount = 0;
+
+  if (activeMode === 'select') {
+    const selectChara = [...document.getElementsByName('chara')].filter(cb => cb.checked).map(cb => cb.value);
+
+    for (let i = 0; i < nameBlocks.length; i++) {
+      const nb = nameBlocks[i];
+      const card = nb.closest('.charaBox');
+      const charName = nb.querySelector('.charaName')?.textContent || '';
+      card.style.display = '';
+
+      if (selectChara.includes(charName)) {
+        card.classList.remove("is-hidden");
+        visibleCount++;
+      } else {
+        card.classList.add("is-hidden");
+      }
+    }
+    document.getElementById("chara_count").textContent = visibleCount;
+    return;
+  }
+
+  const selectStar = [...document.getElementsByName('star')].filter(cb => cb.checked).map(cb => cb.value);
+  const selectInfluence = [...document.getElementsByName('influence')].filter(cb => cb.checked).map(cb => cb.value);
+  const selectJob = [...document.getElementsByName('job')].filter(cb => cb.checked).map(cb => cb.value);
+  const selectPhyAtk = [...document.getElementsByName('phyAtk')].filter(cb => cb.checked).map(cb => cb.value);
+  const selectAtrAtk = [...document.getElementsByName('atrAtk')].filter(cb => cb.checked).map(cb => cb.value);
+
+  if (selectStar.length === 0 || selectInfluence.length === 0) {
+    hideAllCharacters();
+    document.getElementById("chara_count").textContent = 0;
+    return;
+  }
+
+  const influenceMap = {
+    "富": ["富", "所有"],
+    "権力": ["権力", "支配"],
+    "名声": ["名声", "承認"]
+  };
+
+  for (let i = 0; i < nameBlocks.length; i++) {
+    const nb = nameBlocks[i];
+    const card = nb.closest('.charaBox');
+    card.style.display = '';
+
+    const charStar = nb.dataset.star;
+    if (!selectStar.includes(charStar)) {
+      card.classList.add("is-hidden");
+      continue;
+    }
+
+    const charInflu = nb.dataset.influ;
+    const influencePass = selectInfluence.some(sel => influenceMap[sel].includes(charInflu));
+    if (!influencePass) {
+      card.classList.add("is-hidden");
+      continue;
+    }
+
+    const charJob = nb.dataset.job;
+    if (selectJob.length > 0 && !selectJob.includes(charJob)) {
+      card.classList.add("is-hidden");
+      continue;
+    }
+
+    const charPhyList = nb.dataset.phyatk ? nb.dataset.phyatk.split(",").filter(v => v) : [];
+    const phyPass = selectPhyAtk.length > 0 && charPhyList.some(phy => selectPhyAtk.includes(phy));
+
+    const charAtrList = nb.dataset.atratk ? nb.dataset.atratk.split(",").filter(v => v) : [];
+    const atrPass = selectAtrAtk.length > 0 && charAtrList.some(atr => selectAtrAtk.includes(atr));
+
+    const atkPass = (selectPhyAtk.length === 0 && selectAtrAtk.length === 0)
+      ? true
+      : (phyPass || atrPass);
+
+    if (!atkPass) {
+      card.classList.add("is-hidden");
+      continue;
+    }
+
+    card.classList.remove("is-hidden");
+    visibleCount++;
+  }
+
+  document.getElementById("chara_count").textContent = visibleCount;
+}
+
+function hideAllCharacters() {
+  const nameBlocks = document.getElementsByClassName('nameBlock');
+  for (let i = 0; i < nameBlocks.length; i++) {
+    const card = nameBlocks[i].closest('.charaBox');
+    card.classList.add("is-hidden");
+  }
+}
+
 function toggleAbilityContainer(type, forceState = null) {
   const allBtn = document.getElementById(`btnAll${type}`);
   const titles = document.querySelectorAll(`.${type}Title`);
@@ -533,107 +622,4 @@ function toggleAbilityContainer(type, forceState = null) {
       titles[index].classList.toggle('is-active', shouldOpen);
     }
   });
-}
-
-function cbChoice() {
-  const selectStar = [...document.getElementsByName('star')]
-    .filter(cb => cb.checked)
-    .map(cb => cb.value);
-
-  const selectInfluence = [...document.getElementsByName('influence')]
-    .filter(cb => cb.checked)
-    .map(cb => cb.value);
-
-  const selectJob = [...document.getElementsByName('job')]
-    .filter(cb => cb.checked)
-    .map(cb => cb.value);
-
-  const selectPhyAtk = [...document.getElementsByName('phyAtk')]
-    .filter(cb => cb.checked)
-    .map(cb => cb.value);
-
-  const selectAtrAtk = [...document.getElementsByName('atrAtk')]
-    .filter(cb => cb.checked)
-    .map(cb => cb.value);
-
-  if (selectStar.length === 0 || selectInfluence.length === 0) {
-    hideAllCharacters();
-    document.getElementById("chara_count").textContent = 0;
-    return;
-  }
-
-  const influenceMap = {
-    "富": ["富", "所有"],
-    "権力": ["権力", "支配"],
-    "名声": ["名声", "承認"]
-  };
-
-  const nameBlocks = document.getElementsByClassName('nameBlock');
-  let visibleCount = 0;
-
-  for (let i = 0; i < nameBlocks.length; i++) {
-    const card = nameBlocks[i].closest('.charaBox');
-    card.classList.remove("is-hidden");
-  }
-
-  for (let i = 0; i < nameBlocks.length; i++) {
-    const nb = nameBlocks[i];
-    const card = nb.closest('.charaBox');
-    const charStar = nb.dataset.star;
-    const charJob = nb.dataset.job;
-    const charInflu = nb.dataset.influ;
-
-    if (!selectStar.includes(charStar)) {
-      card.classList.add("is-hidden");
-      continue;
-    }
-
-    const influencePass = selectInfluence.some(sel => {
-      return influenceMap[sel].includes(charInflu);
-    });
-    if (!influencePass) {
-      card.classList.add("is-hidden");
-      continue;
-    }
-
-    if (selectJob.length > 0 && !selectJob.includes(charJob)) {
-      card.classList.add("is-hidden");
-      continue;
-    }
-
-    const charPhyList = nb.dataset.phyatk
-      ? nb.dataset.phyatk.split(",").filter(v => v)
-      : [];
-    const phyPass =
-      selectPhyAtk.length > 0 &&
-      charPhyList.some(phy => selectPhyAtk.includes(phy));
-
-    const charAtrList = nb.dataset.atratk
-      ? nb.dataset.atratk.split(",").filter(v => v)
-      : [];
-    const atrPass =
-      selectAtrAtk.length > 0 &&
-      charAtrList.some(atr => selectAtrAtk.includes(atr));
-
-    const atkPass =
-      (selectPhyAtk.length === 0 && selectAtrAtk.length === 0)
-        ? true
-        : (phyPass || atrPass);
-
-    if (!atkPass) {
-      card.classList.add("is-hidden");
-      continue;
-    }
-    visibleCount++;
-  }
-
-  document.getElementById("chara_count").textContent = visibleCount;
-}
-
-function hideAllCharacters() {
-  const nameBlocks = document.getElementsByClassName('nameBlock');
-  for (let i = 0; i < nameBlocks.length; i++) {
-    const card = nameBlocks[i].closest('.charaBox');
-    card.classList.add("is-hidden");
-  }
 }
