@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#250f06">
   <link rel='icon' type='image/x-icon' href='./icon/favicon.ico'>
   <link rel="apple-touch-icon" href="./icon/apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=09261351">
+  <link rel="stylesheet" href="style.css?v=09261443">
   <title>救我の書</title>
 
 <body>
@@ -14,69 +14,60 @@
   <h1 class="line">キャラクター情報</h1>
 
   <div id="menu">
-    <button id="btnSearch" popovertarget="searchBlock" popovertargetaction="toggle">絞り込み</button>
+    <button  type="button" id="btnSearch" popovertarget="searchBlock" popovertargetaction="toggle">絞り込み</button>
     <div id="searchBlock" popover>
-      <div class="search_wrap">
-        <ul id="cbStar" class="cbList">
-          <li><label><input type="checkbox" name="star" value="5" checked>星5</label></li>
-          <li><label><input type="checkbox" name="star" value="4" checked>星4</label></li>
-          <li><label><input type="checkbox" name="star" value="3" checked>星3</label></li>
+      <ul id="cbStar" class="cbList">
+        <li><label><input type="checkbox" name="star" value="5" checked>星5</label></li>
+        <li><label><input type="checkbox" name="star" value="4" checked>星4</label></li>
+        <li><label><input type="checkbox" name="star" value="3" checked>星3</label></li>
 
-          <li><label><input type="checkbox" name="influence" value="富" checked>富</label></li>
-          <li><label><input type="checkbox" name="influence" value="権力" checked>権力</label></li>
-          <li><label><input type="checkbox" name="influence" value="名声" checked>名声</label></li>
-        </ul>
+        <li><label><input type="checkbox" name="influence" value="富" checked>富</label></li>
+        <li><label><input type="checkbox" name="influence" value="権力" checked>権力</label></li>
+        <li><label><input type="checkbox" name="influence" value="名声" checked>名声</label></li>
+      </ul>
 
-        <ul id="cbJob" class="cbList">
-          <li><label><input type="checkbox" name="job" value="剣士" checked>剣士</label></li>
-          <li><label><input type="checkbox" name="job" value="薬師" checked>薬師</label></li>
-          <li><label><input type="checkbox" name="job" value="盗賊" checked>盗賊</label></li>
-          <li><label><input type="checkbox" name="job" value="学者" checked>学者</label></li>
-          <li><label><input type="checkbox" name="job" value="神官" checked>神官</label></li>
-          <li><label><input type="checkbox" name="job" value="狩人" checked>狩人</label></li>
-          <li><label><input type="checkbox" name="job" value="商人" checked>商人</label></li>
-          <li><label><input type="checkbox" name="job" value="踊子" checked>踊子</label></li>
-        </ul>
+      <ul id="cbJob" class="cbList">
+        <li><label><input type="checkbox" name="job" value="剣士" checked>剣士</label></li>
+        <li><label><input type="checkbox" name="job" value="薬師" checked>薬師</label></li>
+        <li><label><input type="checkbox" name="job" value="盗賊" checked>盗賊</label></li>
+        <li><label><input type="checkbox" name="job" value="学者" checked>学者</label></li>
+        <li><label><input type="checkbox" name="job" value="神官" checked>神官</label></li>
+        <li><label><input type="checkbox" name="job" value="狩人" checked>狩人</label></li>
+        <li><label><input type="checkbox" name="job" value="商人" checked>商人</label></li>
+        <li><label><input type="checkbox" name="job" value="踊子" checked>踊子</label></li>
+      </ul>
 
-        <ul id="cbPhyAtk" class="cbList">
-          <li><label><input type="checkbox" name="phyAtk" value="w-sword" checked>剣</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-axe" checked>斧</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-short" checked>短剣</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-book" checked>本</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-staff" checked>杖</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-bow" checked>弓</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-spear" checked>槍</label></li>
-          <li><label><input type="checkbox" name="phyAtk" value="w-fan" checked>扇</label></li>
-        </ul>
+      <ul id="cbPhyAtk" class="cbList">
+        <li><label><input type="checkbox" name="phyAtk" value="w-sword" checked>剣</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-axe" checked>斧</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-short" checked>短剣</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-book" checked>本</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-staff" checked>杖</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-bow" checked>弓</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-spear" checked>槍</label></li>
+        <li><label><input type="checkbox" name="phyAtk" value="w-fan" checked>扇</label></li>
+      </ul>
 
-        <ul id="cbAtrAtk" class="cbList">
-          <li><label><input type="checkbox" name="atrAtk" value="a-fire" checked>火</label></li>
-          <li><label><input type="checkbox" name="atrAtk" value="a-ice" checked>氷</label></li>
-          <li><label><input type="checkbox" name="atrAtk" value="a-thunder" checked>雷</label></li>
-          <li><label><input type="checkbox" name="atrAtk" value="a-wind" checked>風</label></li>
-          <li><label><input type="checkbox" name="atrAtk" value="a-light" checked>光</label></li>
-          <li><label><input type="checkbox" name="atrAtk" value="a-dark" checked>闇</label></li>
-        </ul>
-
-        <button type="button" id="btnOnOff" name="1">全ON/OFF</button>
-      </div>
+      <ul id="cbAtrAtk" class="cbList">
+        <li><label><input type="checkbox" name="atrAtk" value="a-fire" checked>火</label></li>
+        <li><label><input type="checkbox" name="atrAtk" value="a-ice" checked>氷</label></li>
+        <li><label><input type="checkbox" name="atrAtk" value="a-thunder" checked>雷</label></li>
+        <li><label><input type="checkbox" name="atrAtk" value="a-wind" checked>風</label></li>
+        <li><label><input type="checkbox" name="atrAtk" value="a-light" checked>光</label></li>
+        <li><label><input type="checkbox" name="atrAtk" value="a-dark" checked>闇</label></li>
+      </ul>
+      <button type="button" id="btnOnOff" name="1">全ON/OFF</button>
     </div>
 
-      <button type="button" id="btnOpen">キャラ選択</button>
-
-     <div id="modalOverlay" class="overlay">
-      <div class="modal_wrapper">
-        <button type="button" id="btnReset">全選択解除</button>
-        <button type="button" id="btnClose">✕</button>
-        <ul id="charaList"></ul>
-      </div>
+    <button type="button" id="btnOpen" popovertarget="modal_chara" popovertargetaction="toggle">キャラ選択</button>
+    <div id="modal_chara" popover>
+      <button type="button" id="btnReset">全選択解除</button>
+      <button type="button" id="btnClose" popovertarget="modal_chara">✕</button>
+      <ul id="charaList"></ul>
     </div>
-
-      <button type="button" id="btnAllbAbi">バトアビ</button>
-      <button type="button" id="btnAlleAbi">EX/必殺技</button>
-      <button type="button" id="btnAllsAbi">サポアビ</button>
-    </div>
-
+    <button type="button" id="btnAllbAbi">バトアビ</button>
+    <button type="button" id="btnAlleAbi">EX/必殺技</button>
+    <button type="button" id="btnAllsAbi">サポアビ</button>
     <div id="chara_count"></div>
   </div>
 
@@ -144,6 +135,6 @@
   <div id="wrapper"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
-  <script src="main.js?v=09261351"></script>
+  <script src="main.js?v=09261443"></script>
 </body>
 </html>

@@ -423,53 +423,7 @@ function setupCharaList(charaList) {
 }
 
 function setupEventListeners(){
-  const overlay = document.getElementById('modalOverlay');
-  const btnOpen = document.getElementById('btnOpen');
-  const btnClose = document.getElementById('btnClose');
-  const btnReset = document.getElementById('btnReset');
-  const cbChara = document.getElementsByName('chara');
-  const chrBoxNum = document.getElementsByClassName('charaBox');
   const charaCount = document.getElementById('chara_count');
-
-  btnOpen.addEventListener('click', () => {
-    document.getElementById('modalOverlay').classList.add('is-open');
-  });
-
-  btnClose.addEventListener('click', () => {
-    document.getElementById('modalOverlay').classList.remove('is-open');
-  });
-
-  const ul = document.getElementById('charaList');
-  ul.addEventListener('click', (e) => {
-    if(e.target.tagName !== 'INPUT') return;
-
-    const selectChara = [...cbChara].filter(c => c.checked).map(c => c.value);
-    let visibleCount = 0;
-
-    for(let j=0; j<chrBoxNum.length; j++){
-      const str = chrBoxNum[j].querySelector('.charaName').innerText;
-      if(selectChara.includes(str)){
-        chrBoxNum[j].style.display = 'flex';
-        visibleCount++;
-      } else {
-        chrBoxNum[j].style.display = 'none';
-      }
-    }
-    charaCount.textContent = visibleCount;
-  });
-
-  overlay.addEventListener('click', (e) => {
-    if (!e.target.closest('.modal_wrapper')) {
-      overlay.classList.remove('is-open');
-    }
-  });
-
-  btnReset.addEventListener('click', () => {
-    cbChara.forEach(c => c.checked = false);
-    [...chrBoxNum].forEach(box => box.style.display = 'flex');
-    charaCount.textContent = chrBoxNum.length;
-  });
-
   const cbStar = document.getElementsByName('star');
   const cbInfluence = document.getElementsByName('influence');
   const cbJob = document.getElementsByName('job');
@@ -498,6 +452,35 @@ function setupEventListeners(){
     });
     btnOnOff.name = isChecked ? '0' : '1';
     cbChoice();
+  });
+
+  const btnReset = document.getElementById('btnReset');
+  const cbChara = document.getElementsByName('chara');
+  const chrBoxNum = document.getElementsByClassName('charaBox');
+
+  const ul = document.getElementById('charaList');
+  ul.addEventListener('click', (e) => {
+    if(e.target.tagName !== 'INPUT') return;
+
+    const selectChara = [...cbChara].filter(c => c.checked).map(c => c.value);
+    let visibleCount = 0;
+
+    for(let j=0; j<chrBoxNum.length; j++){
+      const str = chrBoxNum[j].querySelector('.charaName').innerText;
+      if(selectChara.includes(str)){
+        chrBoxNum[j].style.display = 'flex';
+        visibleCount++;
+      } else {
+        chrBoxNum[j].style.display = 'none';
+      }
+    }
+    charaCount.textContent = visibleCount;
+  });
+
+  btnReset.addEventListener('click', () => {
+    cbChara.forEach(c => c.checked = false);
+    [...chrBoxNum].forEach(box => box.style.display = 'flex');
+    charaCount.textContent = chrBoxNum.length;
   });
 
   document.getElementById('btnAllbAbi')?.addEventListener('click', () => toggleAbilityContainer('bAbi'));
