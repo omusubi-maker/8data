@@ -470,12 +470,6 @@ function setupEventListeners(){
     charaCount.textContent = chrBoxNum.length;
   });
 
-  const btnSearch = document.getElementById('btnSearch');
-  const searchBlock = document.getElementById('searchBlock');
-  btnSearch.addEventListener('click', () => {
-    searchBlock.classList.toggle('open-menu');
-  });
-
   const cbStar = document.getElementsByName('star');
   const cbInfluence = document.getElementsByName('influence');
   const cbJob = document.getElementsByName('job');
