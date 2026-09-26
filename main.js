@@ -1,23 +1,26 @@
 let serverData = null;
+const dataPromise = loadJson();
 
 async function loadJson() {
-  const url = "https://script.google.com/macros/s/AKfycbxvdYQ1mVhPqisUkY2YFa1PxoQPm5oIb84gJsPiRl3jMtU-sFsYUZ8rRommG22GJMpI/exec";
+  const url = "./data.json";
   const res = await fetch(url);
-  serverData = await res.json();
-  initApp();
+  return await res.json();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadJson();
+document.addEventListener("DOMContentLoaded", async () => {
+  serverData = await dataPromise;
+  initApp();
 
   const cardList = document.getElementById("wrapper");
-  new Sortable(cardList, {
-    swap: true,
-    handle: '.charaName',
-    delay: 200,
-    delayOnTouchOnly: true,
-    animation: 150,
-  });
+  if (cardList) {
+    new Sortable(cardList, {
+      swap: true,
+      handle: '.charaName',
+      delay: 200,
+      delayOnTouchOnly: true,
+      animation: 150,
+    });
+  }
 });
 
 function initApp() {
