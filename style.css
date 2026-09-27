@@ -81,8 +81,7 @@ h1 {
   user-select: none;
 }
 .view-btn:hover {
-  background-color: #e8e8ed;
-  border-color: #c6c6cc;
+  background-color: #e3d0ff;
 }
 .view-btn:active {
   transform: scale(0.98);
@@ -95,9 +94,9 @@ h1 {
   display: none;
 }
 .view-btn.is-active {
-  background-color: #70b7ff;
+  background-color: #965be9;
   color: #ffffff;
-  border-color: #70b7ff;
+  border-color: #965be9;
 }
 .view-btn.is-active .icon-2col {
   display: none;
@@ -234,7 +233,13 @@ h1 {
   gap: 10px;
 }
 #wrapper.max-2col {
-  grid-template-columns: repeat(auto-fill, minmax(327px, min(calc(50% - 10px), 420px)));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 327px), 1fr));
+  justify-content: center;
+}
+#wrapper.max-2col > * {
+  max-width: 420px;
+  width: 100%;
+  justify-self: center;
 }
 .charaBox {
   display: flex;
@@ -487,7 +492,7 @@ h1 {
 .icon.note     { background-position: -528px 0; }
 
 @media (max-width: 1023px) {
-  .controls {
+  .colcontrol {
     display: none;
   }
 }
