@@ -234,7 +234,7 @@ h1 {
 }
 #wrapper.max-2col {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 327px), 1fr));
-  justify-content: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 #wrapper.max-2col > * {
   max-width: 420px;
