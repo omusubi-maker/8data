@@ -29,6 +29,11 @@ button, label, input[checkbox],
 .bAbiTitle, .eAbiTitle, .sAbiTitle {
   cursor: pointer;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 h1 {
   margin: 8px auto;
   padding: 2px;
@@ -53,6 +58,53 @@ h1 {
 }
 .line::before { left: 0; }
 .line::after { right: 0; }
+
+.left-space, .colcontrol {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1%;
+  width: 40px;
+}
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  background-color: #f5f5f7;
+  border: 1px solid #dcdce0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.view-btn:hover {
+  background-color: #e8e8ed;
+  border-color: #c6c6cc;
+}
+.view-btn:active {
+  transform: scale(0.98);
+}
+.btn-icon {
+  display: flex;
+  align-items: center;
+}
+.view-btn .icon-auto {
+  display: none;
+}
+.view-btn.is-active {
+  background-color: #70b7ff;
+  color: #ffffff;
+  border-color: #70b7ff;
+}
+.view-btn.is-active .icon-2col {
+  display: none;
+}
+.view-btn.is-active .icon-auto {
+  display: block;
+}
 
 #menu {
   display: flex;
@@ -180,6 +232,9 @@ h1 {
   width: 100%;
   padding: 0 1%;
   gap: 10px;
+}
+#wrapper.max-2col {
+  grid-template-columns: repeat(auto-fill, minmax(327px, min(calc(50% - 10px), 420px)));
 }
 .charaBox {
   display: flex;
@@ -431,8 +486,20 @@ h1 {
 .icon.res-dark   { background-position: -512px 0; }
 .icon.note     { background-position: -528px 0; }
 
-@media screen and (max-width: 599px) {
+@media (max-width: 1023px) {
+  .controls {
+    display: none;
+  }
+}
+@media (max-width: 674px) {
   body { font-size: 10px; }
+  #wrapper,
+  #wrapper.max-2col {
+      grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 599px) {
+  
 }
 
 @media (orientation: landscape) {

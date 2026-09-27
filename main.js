@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function initApp() {
   setupCharaList(serverData.chara);
   createCards(serverData.chara, serverData.kotadame);
+  columnControl();
   setupEventListeners();
 }
 
@@ -400,6 +401,16 @@ function renderAttackTypes(targetElement, typeString, map) {
     fragment.appendChild(div);
   }
   targetElement.appendChild(fragment);
+}
+
+function columnControl() {
+  const toggleBtn = document.getElementById('toggle-view-btn');
+  const wrapper = document.getElementById('wrapper');
+
+  toggleBtn.addEventListener('click', () => {
+    const is2Col = wrapper.classList.toggle('max-2col');
+    toggleBtn.classList.toggle('is-active', is2Col);
+  });
 }
 
 function setupCharaList(charaList) {
