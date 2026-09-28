@@ -198,119 +198,98 @@ function setupCharaDetails(clone, chara, kotoDame) {
   renderAttackTypes(nb.querySelector('.attributeA'), chara['属'], ATR_MAP);
 }
 
+function formatValueHtml(rawVal, type) {
+  if (!rawVal) {
+    return type === 'percent-fixed' ? '<span class="none">－</span>' : '';
+  }
+
+  const str = String(rawVal).trim();
+  if (type === 'text') return str;
+
+  const komeClassMap = { '1': 'kome1', '2': 'kome2', '3': 'kome3' };
+  if (str.includes(',')) {
+    const [num, komeType] = str.split(',');
+    const cls = komeClassMap[komeType] || "";
+    return `<span class="${cls}">${num}<span class="per">%</span></span>`;
+  }
+  return `${str}<span class="per">%</span>`;
+}
+
 function setupUpperOrigin(clone, chara) {
   const upperBlock = clone.querySelector('.upperBlock');
 
-  const komeClassMap = { '1': 'kome1', '2': 'kome2', '3': 'kome3' };
+  const atkValueData = chara.atkValue || {};
+  const phyVal = formatValueHtml(atkValueData["物攻"], "percent-fixed");
+  upperBlock.querySelector('.slot_atkPhy .val').innerHTML = phyVal;
+  const atrVal = formatValueHtml(atkValueData["属攻"], "percent-fixed");
+  upperBlock.querySelector('.slot_atkAtr .val').innerHTML = atrVal;
+  const dmgLimitEl = upperBlock.querySelector('.slot_dmgLimit');
+  if (atkValueData["上撒"]) {
+    dmgLimitEl.style.display = "";
+    dmgLimitEl.querySelector('.val').textContent = String(atkValueData["上撒"]).trim();
+  } else {
+    dmgLimitEl.style.display = "none";
+  }
 
-  const SECTIONS = {
-    atkValue: { data: chara.atkValue },
-    atkPhys:  { data: chara.atkPhys },
-    atkAtrs:  { data: chara.atkAtrs },
-    atkOther: { data: chara.atkOther },
-    defPA:    { data: chara.defPA },
-    補足:     { data: chara["補足"] },
-    rdtAtr:   { data: chara.rdtAtr }
-  };
-
-  const ORDER = [
-    "atkValue",
-    "atkPhys",
-    "atkAtrs",
-    "atkOther",
-    "defPA",
-    "補足",
-    "rdtAtr"
+  const variableArea = upperBlock.querySelector('.variable-area');
+  const variableSections = [
+    { name: 'atkPhys', data: chara.atkPhys },
+    { name: 'atkAtrs', data: chara.atkAtrs },
+    { name: 'atkOther', data: chara.atkOther },
+    { name: 'defPA',   data: chara.defPA },
   ];
 
-  for (const sectionName of ORDER) {
-    const section = SECTIONS[sectionName];
-    if (!section) continue;
+  let variableHtml = "";
 
-    const data = section.data;
-    if (!data) continue;
+  for (const sec of variableSections) {
+    if (!sec.data) continue;
 
-    if (sectionName === "補足") {
-      const iconInfo = UPPER_ICON_MAP["補足"]["補足"];
-      if (!iconInfo) continue;
+    const validItemsHtml = Object.keys(sec.data).map(key => {
+      const rawVal = sec.data[key];
+      const iconInfo = UPPER_ICON_MAP[sec.name]?.[key];
+      if (!rawVal || !iconInfo) return '';
 
-      const div = document.createElement('div');
-      div.classList.add("note");
+      const valHtml = formatValueHtml(rawVal, iconInfo.type);
+      return `
+        <span>
+          <div class="icon ${iconInfo.cls}" title="${iconInfo.title}"></div>
+          ${valHtml}
+        </span>
+      `;
+    }).join('');
 
-      const icon = document.createElement('div');
-      icon.classList.add('icon', iconInfo.cls);
-      icon.title = iconInfo.title;
-      div.appendChild(icon);
-
-      div.insertAdjacentHTML('beforeend', String(data).trim());
-      upperBlock.appendChild(div);
-      continue;
+    if (validItemsHtml.trim()) {
+      variableHtml += `<div class="upper ${sec.name}">${validItemsHtml}</div>`;
     }
+  }
 
-    const keys = Object.keys(data);
-
-    if (sectionName !== "atkValue" && sectionName !== "rdtAtr") {
-      const hasValidValue = keys.some(key => {
-        const v = data[key];
-        return v !== null && v !== "" && v !== undefined;
-      });
-      if (!hasValidValue) continue;
+  if (chara["補足"]) {
+    const noteStr = String(chara["補足"]).trim();
+    if (noteStr) {
+      variableHtml += `
+        <div class="note">
+          <div class="icon note" title="補足"></div>
+          ${noteStr}
+        </div>
+      `;
     }
+  }
 
-    const rowDiv = document.createElement('div');
-    rowDiv.classList.add('upper', sectionName);
+  variableArea.innerHTML = variableHtml;
 
-    if (sectionName === "atkValue") {
-      rowDiv.style.gridTemplateColumns = "1fr 1fr 6fr";
-    }
+  const rdtData = chara.rdtAtr || {};
+  const rdtKeys = [
+    { key: "火耐", cls: ".slot_res-fire" },
+    { key: "氷耐", cls: ".slot_res-ice" },
+    { key: "雷耐", cls: ".slot_res-thunder" },
+    { key: "風耐", cls: ".slot_res-wind" },
+    { key: "光耐", cls: ".slot_res-light" },
+    { key: "闇耐", cls: ".slot_res-dark" },
+  ];
 
-    upperBlock.appendChild(rowDiv);
-
-    for (const key of keys) {
-      const rawVal = data[key];
-      const iconInfo = UPPER_ICON_MAP[sectionName][key];
-      if (!iconInfo) continue;
-
-      const keyType = iconInfo.type;
-      let valHtml = "";
-
-      if (keyType === "text") {
-        if (!rawVal) continue;
-        valHtml = String(rawVal).trim();
-      } else if (keyType === "percent-fixed") {
-        if (!rawVal) {
-          valHtml = '<span class="none">－</span>';
-        } else {
-          const str = String(rawVal).trim();
-          if (str.includes(',')) {
-            const [num, type] = str.split(',');
-            const cls = komeClassMap[type] || "";
-            valHtml = `<span class="${cls}">${num}<span class="per">%</span></span>`;
-          } else {
-            valHtml = `${str}<span class="per">%</span>`;
-          }
-        }
-      } else if (keyType === "percent") {
-        if (!rawVal) continue;
-        const str = String(rawVal).trim();
-        if (str.includes(',')) {
-          const [num, type] = str.split(',');
-          const cls = komeClassMap[type] || "";
-          valHtml = `<span class="${cls}">${num}<span class="per">%</span></span>`;
-        } else {
-          valHtml = `${str}<span class="per">%</span>`;
-        }
-      }
-
-      const span = document.createElement('span');
-      const icon = document.createElement('div');
-      icon.classList.add('icon', iconInfo.cls);
-      icon.title = iconInfo.title;
-      span.appendChild(icon);
-
-      span.insertAdjacentHTML('beforeend', valHtml);
-      rowDiv.appendChild(span);
-    }
+  for (const item of rdtKeys) {
+    const valHtml = formatValueHtml(rdtData[item.key], "percent-fixed");
+    upperBlock.querySelector(`${item.cls} .val`).innerHTML = valHtml;
   }
 }
 

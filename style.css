@@ -85,7 +85,7 @@ h1 {
   user-select: none;
 }
 .view-btn:hover {
-  background-color: #e3d0ff;
+  background-color: #e5d2ff;
 }
 .view-btn:active {
   transform: scale(0.98);
@@ -318,6 +318,9 @@ h1 {
 }
 .upperBlock .icon {
   margin: 0 2px 2px 0;
+}
+.upper.atkValue .slot-dmgLimit {
+  grid-column: 4;
 }
 .dmgLimit {
   grid-column: span 5 / span 5;
