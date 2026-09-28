@@ -250,12 +250,7 @@ function setupUpperOrigin(clone, chara) {
       if (!rawVal || !iconInfo) return '';
 
       const valHtml = formatValueHtml(rawVal, iconInfo.type);
-      return `
-        <span>
-          <div class="icon ${iconInfo.cls}" title="${iconInfo.title}"></div>
-          ${valHtml}
-        </span>
-      `;
+      return `<span><div class="icon ${iconInfo.cls}" title="${iconInfo.title}"></div>${valHtml}</span>`;
     }).join('');
 
     if (validItemsHtml.trim()) {
@@ -266,12 +261,7 @@ function setupUpperOrigin(clone, chara) {
   if (chara["補足"]) {
     const noteStr = String(chara["補足"]).trim();
     if (noteStr) {
-      variableHtml += `
-        <div class="note">
-          <div class="icon note" title="補足"></div>
-          ${noteStr}
-        </div>
-      `;
+      variableHtml += `<div class="note"><div class="icon note" title="補足"></div>${noteStr}</div>`;
     }
   }
 
