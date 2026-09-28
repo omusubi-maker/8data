@@ -331,15 +331,9 @@ h1 {
 .upperBlock .icon {
   margin: 0 2px 2px 0;
 }
-.upper.atkValue .slot_dmgLimit {
-  grid-column: 4;
-}
-.dmgLimit {
+.slot_dmgLimit {
   grid-column: span 5 / span 5;
   grid-column-start: 4;
-}
-.note {
-  grid-column: span 8 / span 8;
 }
 .none { color: #616161; }
 .kome1{ color: #eded00; }
@@ -512,7 +506,7 @@ h1 {
 
 @media (max-width: 1023px) {
   .left-space, .colcontrol {
-    width: 0px;
+    width: 0;
   }
   .colcontrol {
     display: none;
