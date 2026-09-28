@@ -319,7 +319,7 @@ h1 {
 .upperBlock .icon {
   margin: 0 2px 2px 0;
 }
-.upper.atkValue .slot-dmgLimit {
+.upper.atkValue .slot_dmgLimit {
   grid-column: 4;
 }
 .dmgLimit {
