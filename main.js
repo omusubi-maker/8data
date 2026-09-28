@@ -373,7 +373,7 @@ function renderAttackTypes(targetElement, typeString, map) {
 }
 
 function columnControl() {
-  const toggleBtn = document.getElementById('toggle-view-btn');
+  const toggleBtn = document.getElementById('bnt_toggle-view');
   const wrapper = document.getElementById('wrapper');
 
   toggleBtn.addEventListener('click', () => {

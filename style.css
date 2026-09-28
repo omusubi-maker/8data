@@ -78,10 +78,9 @@ h1 {
 .line::after { right: 0; }
 
 .left-space, .colcontrol {
-  padding: 0 1%;
   width: 40px;
 }
-.view-btn {
+.bnt_view {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -96,28 +95,28 @@ h1 {
   transition: all 0.2s ease;
   user-select: none;
 }
-.view-btn:hover {
+.bnt_view:hover {
   background-color: #e5d2ff;
 }
-.view-btn:active {
+.bnt_view:active {
   transform: scale(0.98);
 }
 .btn-icon {
   display: flex;
   align-items: center;
 }
-.view-btn .icon-auto {
+.bnt_view .icon-auto {
   display: none;
 }
-.view-btn.is-active {
+.bnt_view.is-active {
   background-color: #965be9;
   color: #ffffff;
   border-color: #965be9;
 }
-.view-btn.is-active .icon-2col {
+.bnt_view.is-active .icon-2col {
   display: none;
 }
-.view-btn.is-active .icon-auto {
+.bnt_view.is-active .icon-auto {
   display: block;
 }
 
