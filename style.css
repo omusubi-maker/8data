@@ -33,11 +33,11 @@ body {
     background: #1a0a04;
 }
 ::-webkit-scrollbar-thumb {
-    background: #333;
+    background: #461c0b;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #444;
+    background: #54210d;
 }
 img {
   max-width: 100%;
