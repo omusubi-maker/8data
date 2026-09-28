@@ -78,8 +78,6 @@ h1 {
 .line::after { right: 0; }
 
 .left-space, .colcontrol {
-  display: flex;
-  justify-content: flex-end;
   padding: 0 1%;
   width: 40px;
 }
@@ -513,6 +511,9 @@ h1 {
 .icon.note     { background-position: -528px 0; }
 
 @media (max-width: 1023px) {
+  .left-space, .colcontrol {
+    width: 0px;
+  }
   .colcontrol {
     display: none;
   }
