@@ -260,14 +260,14 @@ h1 {
   display: flex;
   flex-direction: column;
   padding-bottom: 5px;
-  background: #2e2e33;
+  background: #2d2d2f;
 }
 .nameBlock {
   position: relative;
   display: grid;
   grid-template-columns: 46px 106px auto;
   grid-template-rows: 22px;
-  background: #000012;
+  background: #181818;
   font-size: 12px;
 }
 .triangle {
