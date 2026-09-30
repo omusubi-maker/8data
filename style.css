@@ -244,7 +244,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(327px, 1fr));
   width: 100%;
-  padding: 0 1%;
+  padding: 0 1% 15px 1%;
   gap: 10px;
 }
 #wrapper.max-2col {
@@ -267,7 +267,7 @@ h1 {
   display: grid;
   grid-template-columns: 46px 106px auto;
   grid-template-rows: 22px;
-  background: #181818;
+  background: #0a0a0a;
   font-size: 12px;
 }
 .triangle {
