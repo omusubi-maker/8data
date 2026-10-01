@@ -101,7 +101,7 @@ h1 {
 .bnt_view:active {
   transform: scale(0.98);
 }
-.btn-icon {
+.btn_icon {
   display: flex;
   align-items: center;
 }
@@ -162,22 +162,22 @@ h1 {
 #cbJob input[type="checkbox"] {
   accent-color: #0012ff;
 }
-.cbList li input[type="checkbox"], #btnAbiName {
+.cbList li input[type="checkbox"], #btn_AbiName {
   margin: 3px 2px 3px 3px;
 }
-#btnSearch, #btnOnOff, #btnOpen, #btnAllbAbi, #btnAlleAbi, #btnAllsAbi {
+#btn_Search, #btn_OnOff, #btn_Open, #btn_AllbAbi, #btn_AlleAbi, #btn_AllsAbi {
   margin: 10px 5px;
   padding: 5px 7px;
   color: #fff;
   border: 0;
   border-radius: 4px;
 }
-#btnSearch, #btnOnOff, #btnOpen {
+#btn_Search, #btn_OnOff, #btn_Open {
   background: #a7a425;
 }
-#btnAllbAbi { background: #993d3d; }
-#btnAlleAbi { background: #c5814e; }
-#btnAllsAbi { background: #1f7381; }
+#btn_AllbAbi { background: #993d3d; }
+#btn_AlleAbi { background: #c5814e; }
+#btn_AllsAbi { background: #1f7381; }
 #modal_chara {
   margin: auto;
   translate: -16px 0;
@@ -192,12 +192,12 @@ h1 {
 #modal_chara::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }
-#btnReset {
+#btn_Reset {
   padding: 5px 10px;
   background: yellow;
   color: #4f4436;
 }
-#btnClose {
+#btn_Close {
   position: absolute;
   right: 10px;
   padding: 5px 10px;
@@ -371,17 +371,17 @@ h1 {
   color: #34d3bf;
   border-color: rgba(52,211,191,0.5);
 }
-#btnAllbAbi.is-active,
+#btn_AllbAbi.is-active,
 .bAbiTitle.is-active {
   background-color: #993d3d !important;
   color: #ffffff !important;
 }
-#btnAlleAbi.is-active,
+#btn_AlleAbi.is-active,
 .eAbiTitle.is-active {
   background-color: #c5814e !important;
   color: #ffffff !important;
 }
-#btnAllsAbi.is-active,
+#btn_AllsAbi.is-active,
 .sAbiTitle.is-active {
   background-color: #1f7381 !important;
   color: #ffffff !important;
@@ -511,13 +511,19 @@ h1 {
     display: none;
   }
 }
+
 @media (max-width: 674px) {
   body { font-size: 10px; }
   #wrapper,
   #wrapper.max-2col {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
+
+@media (pointer: coarse) and (max-height: 500px) and (orientation: landscape) {
+  body { font-size: 10px; }
+}
+
 @media (orientation: landscape) {
   .modal_wrapper {
     width: 90%;

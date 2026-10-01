@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#250f06">
   <link rel='icon' type='image/x-icon' href='./icon/favicon.ico'>
   <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=0542">
+  <link rel="stylesheet" href="style.css?v=1533">
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js" defer></script>
-  <script src="main.js" defer></script>
+  <script src="main.js?v=1533" defer></script>
   <title>救我の書</title>
 
 <body>
@@ -17,7 +17,7 @@
     <h1 class="line">キャラクター情報</h1>
     <div class="colcontrol">
       <button id="bnt_toggle-view" class="bnt_view" title="表示列切替" aria-label="表示列切替">
-        <span class="btn-icon">
+        <span class="btn_icon">
           <svg class="icon-2col" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="8" height="18" rx="2"/>
             <rect x="13" y="3" width="8" height="18" rx="2"/>
@@ -33,7 +33,7 @@
   </div>
 
   <div id="menu">
-    <button  type="button" id="btnSearch" popovertarget="searchBlock" popovertargetaction="toggle">絞り込み</button>
+    <button  type="button" id="btn_Search" popovertarget="searchBlock" popovertargetaction="toggle">絞り込み</button>
     <div id="searchBlock" popover>
       <ul id="cbStar" class="cbList">
         <li><label><input type="checkbox" name="star" value="5" checked>星5</label></li>
@@ -74,18 +74,18 @@
         <li><label><input type="checkbox" name="atrAtk" value="a-light" checked>光</label></li>
         <li><label><input type="checkbox" name="atrAtk" value="a-dark" checked>闇</label></li>
       </ul>
-      <button type="button" id="btnOnOff" name="1">全ON/OFF</button>
+      <button type="button" id="btn_OnOff" name="1">全ON/OFF</button>
     </div>
 
-    <button type="button" id="btnOpen" popovertarget="modal_chara" popovertargetaction="toggle">キャラ選択</button>
+    <button type="button" id="btn_Open" popovertarget="modal_chara" popovertargetaction="toggle">キャラ選択</button>
     <div id="modal_chara" popover>
-      <button type="button" id="btnReset">全選択解除</button>
-      <button type="button" id="btnClose" popovertarget="modal_chara">✕</button>
+      <button type="button" id="btn_Reset">全選択解除</button>
+      <button type="button" id="btn_Close" popovertarget="modal_chara">✕</button>
       <ul id="charaList"></ul>
     </div>
-    <button type="button" id="btnAllbAbi">バトアビ</button>
-    <button type="button" id="btnAlleAbi">EX/必殺技</button>
-    <button type="button" id="btnAllsAbi">サポアビ</button>
+    <button type="button" id="btn_AllbAbi">バトアビ</button>
+    <button type="button" id="btn_AlleAbi">EX/必殺技</button>
+    <button type="button" id="btn_AllsAbi">サポアビ</button>
     <div id="chara_count"></div>
   </div>
 
@@ -111,7 +111,6 @@
           <span class="slot_atkAtr"><div class="icon atk-atr" title="属攻"></div><span class="val"></span></span>
           <span class="slot_dmgLimit"><div class="icon dmgLimit" title="ダメ上限撒き"></div><span class="val"></span></span>
         </div>
-        <div class="variable-area"></div>
         <div class="upper rdtAtr">
           <span class="slot_res-fire"><div class="icon res-fire" title="火耐"></div><span class="val"></span></span>
           <span class="slot_res-ice"><div class="icon res-ice" title="氷耐"></div><span class="val"></span></span>

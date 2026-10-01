@@ -217,7 +217,6 @@ function formatValueHtml(rawVal, type) {
 
 function setupUpperOrigin(clone, chara) {
   const upperBlock = clone.querySelector('.upperBlock');
-
   const atkValueData = chara.atkValue || {};
   const phyVal = formatValueHtml(atkValueData["物攻"], "percent-fixed");
   upperBlock.querySelector('.slot_atkPhy .val').innerHTML = phyVal;
@@ -231,7 +230,6 @@ function setupUpperOrigin(clone, chara) {
     dmgLimitEl.style.display = "none";
   }
 
-  const variableArea = upperBlock.querySelector('.variable-area');
   const variableSections = [
     { name: 'atkPhys', data: chara.atkPhys },
     { name: 'atkAtrs', data: chara.atkAtrs },
@@ -265,7 +263,10 @@ function setupUpperOrigin(clone, chara) {
     }
   }
 
-  variableArea.innerHTML = variableHtml;
+  const rdtBlock = upperBlock.querySelector('.upper.rdtAtr');
+  if (variableHtml) {
+    rdtBlock.insertAdjacentHTML('beforebegin', variableHtml);
+  }
 
   const rdtData = chara.rdtAtr || {};
   const rdtKeys = [
@@ -437,10 +438,10 @@ function setupEventListeners(){
   for(let phyAtk of cbPhyAtk){ phyAtk.addEventListener('click', onFilterChange); }
   for(let atrAtk of cbAtrAtk){ atrAtk.addEventListener('click', onFilterChange); }
 
-  const btnOnOff = document.getElementById('btnOnOff');
+  const btn_OnOff = document.getElementById('btn_OnOff');
   const checkGroup = document.querySelectorAll('.cbList input[type="checkbox"]');
-  btnOnOff.addEventListener('click', () => {
-    const isChecked = btnOnOff.name !== '0';
+  btn_OnOff.addEventListener('click', () => {
+    const isChecked = btn_OnOff.name !== '0';
 
     checkGroup.forEach((checkbox) => {
       if(isChecked){
@@ -451,13 +452,13 @@ function setupEventListeners(){
         checkbox.checked = true;
       }
     });
-    btnOnOff.name = isChecked ? '0' : '1';
+    btn_OnOff.name = isChecked ? '0' : '1';
     activeMode = 'filter';
     cbChoice();
   });
 
   const cbChara = document.getElementsByName('chara');
-  const btnReset = document.getElementById('btnReset');
+  const btn_Reset = document.getElementById('btn_Reset');
 
   for (const chara of cbChara) {
     chara.addEventListener('change', () => {
@@ -466,16 +467,16 @@ function setupEventListeners(){
     });
   }
 
-  btnReset.addEventListener('click', () => {
+  btn_Reset.addEventListener('click', () => {
     const cbChara = document.getElementsByName('chara');
     cbChara.forEach(c => c.checked = false);
     activeMode = 'filter';
     cbChoice();
   });
 
-  document.getElementById('btnAllbAbi')?.addEventListener('click', () => toggleAbilityContainer('bAbi'));
-  document.getElementById('btnAlleAbi')?.addEventListener('click', () => toggleAbilityContainer('eAbi'));
-  document.getElementById('btnAllsAbi')?.addEventListener('click', () => toggleAbilityContainer('sAbi'));
+  document.getElementById('btn_AllbAbi')?.addEventListener('click', () => toggleAbilityContainer('bAbi'));
+  document.getElementById('btn_AlleAbi')?.addEventListener('click', () => toggleAbilityContainer('eAbi'));
+  document.getElementById('btn_AllsAbi')?.addEventListener('click', () => toggleAbilityContainer('sAbi'));
 
   document.addEventListener('click', function(e) {
     const el = e.target;
@@ -587,7 +588,7 @@ function hideAllCharacters() {
 }
 
 function toggleAbilityContainer(type, forceState = null) {
-  const allBtn = document.getElementById(`btnAll${type}`);
+  const allBtn = document.getElementById(`btn_All${type}`);
   const titles = document.querySelectorAll(`.${type}Title`);
   const blocks = document.querySelectorAll(`.${type}Block`);
   const shouldOpen = forceState !== null ? forceState : !allBtn.classList.contains('is-active');
